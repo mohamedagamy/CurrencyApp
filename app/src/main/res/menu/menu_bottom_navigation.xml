@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/converter_fragment"
+        android:icon="@drawable/nav_converter"
+        android:iconTint="@color/white"
+        app:showAsAction="always"
+        android:title="Converter" />
+
+    <item
+        android:id="@+id/details_fragment"
+        app:showAsAction="always"
+        android:icon="@drawable/nav_trend"
+        android:iconTint="@color/white"
+        android:title="Trend" />
+
+
+    <item
+        android:id="@+id/history_fragment"
+        app:showAsAction="always"
+        android:icon="@drawable/nav_date_fav"
+        android:iconTint="@color/white"
+        android:title="History" />
+
+</menu>
