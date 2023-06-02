@@ -49,12 +49,44 @@ class ConverterFragment : Fragment() {
             (activity as MainActivity).navigateToTrends()
         }
 
-        val targetArrayAdapter: ArrayAdapter<*> = ArrayAdapter<String>(
+        val baseSpinnerAdapter: ArrayAdapter<*> = ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
             resources.getStringArray(R.array.currency_array))
 
-        binding.targetSpinner.adapter = targetArrayAdapter
+        val targetSpinnerAdapter: ArrayAdapter<*> = ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            resources.getStringArray(R.array.currency_array))
+
+
+        binding.baseSpinner.adapter = baseSpinnerAdapter
+        binding.targetSpinner.adapter = targetSpinnerAdapter
+
+        binding.baseSpinner.setSelection(46)
+
+        binding.ivConvert.setOnClickListener {
+           val baseSpinnerSelection = binding.baseSpinner.selectedItemPosition
+           val targetSpinnerSelection = binding.targetSpinner.selectedItemPosition
+            binding.baseSpinner.setSelection(targetSpinnerSelection)
+            binding.targetSpinner.setSelection(baseSpinnerSelection)
+        }
+
+        binding.targetSpinner.onItemSelectedListener = object :OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long) {
+                //Here we reload inputs
+                populateInputs()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
 
         binding.targetSpinner.onItemSelectedListener = object :OnItemSelectedListener{
             override fun onItemSelected(
@@ -97,7 +129,7 @@ class ConverterFragment : Fragment() {
     }
 
     private fun showData(apiResult: CurrencyResponse) {
-        val baseValue = apiResult.rates.get(binding.tvBaseCurrency.text.toString())
+        val baseValue = apiResult.rates.get(binding.baseSpinner.selectedItem.toString())
         val targetValue = apiResult.rates.get(binding.targetSpinner.selectedItem.toString()) ?: 0.0
         binding.etBaseCurrency.setText(baseValue.toString())
         binding.etTargetCurrency.setText(targetValue.toString())
