@@ -2,7 +2,6 @@ package com.example.currencyapp.ui.adapter
 import android.view.View
 import com.example.currencyapp.R
 import com.example.currencyapp.databinding.ItemCurrencyBinding
-import com.example.currencyapp.databinding.ItemPopularCurrencyBinding
 import com.example.data.model.Currency
 import com.xwray.groupie.viewbinding.BindableItem
 

@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Currency</string>
+    <string name="app_name" translatable="false">Currency</string>
     <string name="converter_fragment">Converter</string>
     <string name="history_fragment">History</string>
     <string name="details_fragment">Details</string>
+    <string name="details">Details</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="select_base_currency">select base currency</string>
+    <string name="select_target_currency">select target currency</string>
 
     <string-array name="currency_array_popular">
         <item>GBP</item>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyapp.*
 import com.example.currencyapp.databinding.FragmentPopularCurrencyBinding
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 class PopularCurrencyFragment : Fragment() {
 
     lateinit var binding: FragmentPopularCurrencyBinding
+    val currencyViewModel:CurrencyViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -41,9 +43,9 @@ class PopularCurrencyFragment : Fragment() {
 
     private fun initializeObservers() {
         lifecycleScope.launch {
-            (activity as MainActivity).currencyViewModel.state.collect { state ->
+            currencyViewModel.state.collect { state ->
                 when (state) {
-                    is Loading -> context?.showToast("Loading data...")
+                    is Loading -> context?.showToast("Loading popular data...")
                     is CurrencyUiStateReady -> state.apiResult?.let { showData(it) }
                     is CurrencyUiStateError -> state.error?.let { context?.showToast(it) }
                     else -> {

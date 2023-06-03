@@ -5,23 +5,20 @@
     <item
         android:id="@+id/converter_fragment"
         android:icon="@drawable/nav_converter"
-        android:iconTint="@color/white"
-        app:showAsAction="always"
-        android:title="Converter" />
+        app:showAsAction="ifRoom"
+        android:title="@string/converter_fragment" />
 
     <item
         android:id="@+id/details_fragment"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/nav_trend"
-        android:iconTint="@color/white"
-        android:title="Trend" />
+        android:title="@string/details_fragment" />
 
 
     <item
         android:id="@+id/history_fragment"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/nav_date_fav"
-        android:iconTint="@color/white"
-        android:title="History" />
+        android:title="@string/history_fragment" />
 
 </menu>

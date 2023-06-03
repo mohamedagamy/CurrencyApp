@@ -49,15 +49,15 @@ class HistoryFragment : Fragment() {
         groupieAdapter.clear()
 
         initializeObservers()
-
+        val daysList = get3DaysAgo()
         lifecycleScope.launch {
-            val firstDayJob = currencyViewModel.getHistoricalRate("2023-05-31")
-            val secondDayJob = currencyViewModel.getHistoricalRate("2023-06-01")
-            val thirdDayJob = currencyViewModel.getHistoricalRate("2023-06-02")
+            val firstDayJob = currencyViewModel.getHistoricalRate(daysList.get(0))
+            val secondDayJob = currencyViewModel.getHistoricalRate(daysList.get(1))
+            val thirdDayJob = currencyViewModel.getHistoricalRate(daysList.get(2))
 
+            firstDayJob.await()
             secondDayJob.await()
             thirdDayJob.await()
-            firstDayJob.await()
         }
     }
 
@@ -65,7 +65,7 @@ class HistoryFragment : Fragment() {
         lifecycleScope.launch {
             currencyViewModel.state.collect { state ->
                 when (state) {
-                    is Loading -> context?.showToast("Loading data...")
+                    is Loading -> context?.showToast("Loading history data...")
                     is CurrencyUiStateReady -> state.apiResult?.let { showData(it) }
                     is CurrencyUiStateError -> state.error?.let { context?.showToast(it) }
                     else -> {
