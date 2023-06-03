@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">العملات</string>
+    <string name="converter_fragment">التحويل</string>
+    <string name="history_fragment">السجل</string>
+    <string name="details_fragment">التفاصيل</string>
+    <string name="details">التفاصيل</string>
+    <string name="from">من</string>
+    <string name="to">الي</string>
+    <string name="select_base_currency">اختر العملة الاساسية</string>
+    <string name="select_target_currency">اختار العملة الثانوية</string>
+</resources>
+
+
