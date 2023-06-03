@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currency.domain.usecase.PopularCurrencyUseCase
 import com.example.currency.domain.usecase.GetCurrencyUseCase
+import com.example.currency.domain.usecase.HistoricalRateUseCase
 import com.example.data.common.Resource
 import com.example.data.model.CurrencyResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class CurrencyViewModel @Inject constructor(
     private val currencyUseCase: GetCurrencyUseCase,
     private val popularCurrencyUseCase: PopularCurrencyUseCase,
+    private val historicalRateUseCase: HistoricalRateUseCase,
 ) : ViewModel() {
 
     val state = MutableStateFlow<CurrencyUiState>(Loading)
@@ -32,6 +35,13 @@ class CurrencyViewModel @Inject constructor(
             popularCurrencyUseCase().collect(::handleResponse)
         }
     }
+
+    fun getHistoricalRate(startDate:String) = viewModelScope.async {
+        withContext(Dispatchers.IO) {
+            historicalRateUseCase(startDate).collect(::handleResponse)
+        }
+    }
+
 
     private suspend fun handleResponse(it: Resource<CurrencyResponse>) = withContext(Dispatchers.Main) {
         when (it.status) {

@@ -15,6 +15,6 @@ data class Error(
 )
 
 data class Currency(
-    val currencyKey: String,
-    val currencyValue: String
+    val currencyKey: String = "",
+    val currencyValue: String = ""
 )

@@ -12,4 +12,5 @@ class CurrencyRepository @Inject constructor(
 ) {
     suspend fun getCurrency(): CurrencyResponse = apiService.getCurrency()
     suspend fun getPopularCurrency() =  apiService.getPopularCurrency()
+    suspend fun getHistoricalRates(startDate:String) =  apiService.getHistoricalRates(startDate)
 }
